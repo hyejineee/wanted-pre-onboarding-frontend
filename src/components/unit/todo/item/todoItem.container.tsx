@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { deleteTodo, updateTodo } from "../../../../api/todo";
 import { ITodo } from "../../../../types/todo";
+import TodoInput from "../../../common/todoInput";
 import TodoItemUI from "./todoItem.presenter";
 
 interface ITodoItemContainerProps {
@@ -11,7 +12,9 @@ export default function TodoItemContainer({
   todo,
   refresh,
 }: ITodoItemContainerProps) {
-  console.log(todo);
+  const [isEdit, setIsEdit] = useState(false);
+  const [updatedTodo, setUpdatedTodo] = useState({ todo: "" });
+
   const handleUpdateChecked = async (checked: boolean) => {
     try {
       await updateTodo(todo.id, todo.todo, checked);
@@ -30,12 +33,40 @@ export default function TodoItemContainer({
     }
   };
 
+  const handleEditMode = () => {
+    setIsEdit((p) => !p);
+  };
+
+  const handleUpdateTodo = async () => {
+    try {
+      await updateTodo(todo.id, updatedTodo.todo, todo.isCompleted);
+      refresh();
+      setIsEdit(false);
+    } catch (e) {
+      console.log("handleUpdateTodo error", e);
+    }
+  };
+
   return (
-    <TodoItemUI
-      completed={todo.isCompleted}
-      todo={todo.todo}
-      handleUpdateChecked={handleUpdateChecked}
-      handleDelete={handleDelete}
-    />
+    <div>
+      {isEdit ? (
+        <TodoInput
+          name="todo"
+          defaultValue={todo.todo}
+          isEdit={true}
+          setValue={setUpdatedTodo}
+          onClick={handleUpdateTodo}
+          handleEditMode={handleEditMode}
+        />
+      ) : (
+        <TodoItemUI
+          completed={todo.isCompleted}
+          todo={todo.todo}
+          handleUpdateChecked={handleUpdateChecked}
+          handleDelete={handleDelete}
+          handleEditMode={handleEditMode}
+        />
+      )}
+    </div>
   );
 }

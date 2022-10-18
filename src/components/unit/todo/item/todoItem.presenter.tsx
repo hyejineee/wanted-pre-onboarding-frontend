@@ -1,16 +1,18 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 interface ITodoItemUIProps {
   todo: string;
   completed: boolean;
   handleUpdateChecked: (checked: boolean) => void;
   handleDelete: () => void;
+  handleEditMode: () => void;
 }
 export default function TodoItemUI({
   todo,
   completed,
   handleUpdateChecked,
   handleDelete,
+  handleEditMode,
 }: ITodoItemUIProps) {
   const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
     handleUpdateChecked(e.target.checked);
@@ -18,6 +20,10 @@ export default function TodoItemUI({
 
   const handleClickDelete = () => {
     handleDelete();
+  };
+
+  const handleClickUpdate = () => {
+    handleEditMode();
   };
 
   return (
@@ -29,6 +35,7 @@ export default function TodoItemUI({
       />
       <span>{todo}</span>
       <button onClick={handleClickDelete}>삭제</button>
+      <button onClick={handleClickUpdate}>수정</button>
     </div>
   );
 }

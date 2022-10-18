@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ITodo } from "../../../types/todo";
-import TodoInput from "../../common/inputWithSubmit";
+import TodoInput from "../../common/todoInput";
 import TodoItemContainer from "./item/todoItem.container";
 
 interface ITodoListUIProps {
@@ -24,7 +24,12 @@ export default function TodoListUI({
 
   return (
     <div>
-      <TodoInput onClick={handleClickAdd} name="todo" setValue={setInputs} />
+      <TodoInput
+        onClick={handleClickAdd}
+        name="todo"
+        setValue={setInputs}
+        isEdit={false}
+      />
       {todos.map((e: ITodo, i) => (
         <TodoItemContainer key={i} todo={e} refresh={refresh} />
       ))}

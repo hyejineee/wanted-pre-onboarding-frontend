@@ -1,16 +1,22 @@
 import { ChangeEvent } from "react";
 
-interface IInputWithSubmitProps {
+interface ITodoInputProps {
   name: string;
+  isEdit: boolean;
   setValue: React.Dispatch<React.SetStateAction<any>>;
+  defaultValue?: string;
   onClick: () => void;
+  handleEditMode?: () => void;
 }
 
 export default function TodoInput({
   name,
+  isEdit,
+  defaultValue,
   setValue,
   onClick,
-}: IInputWithSubmitProps) {
+  handleEditMode,
+}: ITodoInputProps) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setValue((p: any) => {
@@ -23,8 +29,9 @@ export default function TodoInput({
 
   return (
     <div>
-      <input onChange={handleChange} />
-      <button onClick={onClick}>클릭</button>
+      <input onChange={handleChange} defaultValue={defaultValue} />
+      <button onClick={onClick}>{isEdit ? "수정" : "추가"}</button>
+      {isEdit && <button onClick={handleEditMode}>취소</button>}
     </div>
   );
 }
