@@ -3,18 +3,12 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/loginPage";
-import SignUpPage from "./pages/signUpPage";
 import TodoListPage from "./pages/todoListPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginPage />,
-  },
-
-  {
-    path: "/signUp",
-    element: <SignUpPage />,
   },
   {
     path: "/todo",

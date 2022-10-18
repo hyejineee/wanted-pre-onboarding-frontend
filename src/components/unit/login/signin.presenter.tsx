@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IAuthParams } from "../../../../types/auth";
-import InputWithLabel from "../../../common/inputWithLabel";
+import { IAuthParams } from "../../../types/auth";
+import InputWithLabel from "../../common/inputWithLabel";
 
 interface ISignInUIProps {
   handleClickSignUp: (params: IAuthParams) => () => void;
