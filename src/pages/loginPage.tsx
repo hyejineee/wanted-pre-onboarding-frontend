@@ -1,6 +1,5 @@
-import { signIn } from "../api/auth";
+import LoginContainer from "../components/unit/auth/login/signin.container";
 
 export default function LoginPage() {
-  signIn({ email: "test@com", password: "123123123" });
-  return <div>로그인</div>;
+  return <LoginContainer />;
 }
