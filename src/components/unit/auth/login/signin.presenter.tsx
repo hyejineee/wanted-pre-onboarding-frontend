@@ -4,9 +4,13 @@ import InputWithLabel from "../../../common/inputWithLabel";
 
 interface ISignInUIProps {
   handleClickSignUp: (params: IAuthParams) => () => void;
+  handleClickSignIn: (params: IAuthParams) => () => void;
 }
 
-export default function SignInUI({ handleClickSignUp }: ISignInUIProps) {
+export default function SignInUI({
+  handleClickSignUp,
+  handleClickSignIn,
+}: ISignInUIProps) {
   const [inputs, setInputs] = useState<IAuthParams>({
     email: "",
     password: "",
@@ -27,6 +31,7 @@ export default function SignInUI({ handleClickSignUp }: ISignInUIProps) {
         setValue={setInputs}
       />
 
+      <button onClick={handleClickSignIn(inputs)}>로그인</button>
       <button onClick={handleClickSignUp(inputs)}>회원가입</button>
     </div>
   );
