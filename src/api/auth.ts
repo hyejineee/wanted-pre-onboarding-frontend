@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { IAuthParams } from "../types/auth";
 
 export const signUp = async (params: IAuthParams) => {
@@ -8,8 +8,12 @@ export const signUp = async (params: IAuthParams) => {
       params
     );
     console.log("signUp api", data);
+    return data.access_token;
   } catch (e) {
-    console.log("signUp error", e);
+    if (e instanceof AxiosError) {
+      const message = e.response?.data.message;
+      throw new Error(message);
+    }
   }
 };
 
@@ -20,10 +24,11 @@ export const signIn = async (params: IAuthParams) => {
       params
     );
     console.log("sign in api", data);
+    return data.access_token;
   } catch (e) {
-    console.log("signIn error", e);
+    if (e instanceof AxiosError) {
+      const message = e.response?.data.message;
+      throw new Error(message);
+    }
   }
 };
-
-
-
