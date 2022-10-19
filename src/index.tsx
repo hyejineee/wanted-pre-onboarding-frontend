@@ -5,16 +5,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/loginPage";
 import TodoListPage from "./pages/todoListPage";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LoginPage />,
-  },
-  {
-    path: "/todo",
-    element: <TodoListPage />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <LoginPage />,
+    },
+    {
+      path: "/todo",
+      element: <TodoListPage />,
+    },
+  ],
+  { basename: process.env.REACT_APP_PUBLIC_URL }
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
