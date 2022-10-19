@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import * as S from "./todoInput.style";
 
 interface ITodoInputProps {
   name: string;
@@ -28,10 +29,15 @@ export default function TodoInput({
   };
 
   return (
-    <div>
-      <input onChange={handleChange} defaultValue={defaultValue} />
-      <button onClick={onClick}>{isEdit ? "수정" : "추가"}</button>
-      {isEdit && <button onClick={handleEditMode}>취소</button>}
-    </div>
+    <S.Wrapper>
+      <S.InputWrapper onChange={handleChange} defaultValue={defaultValue} />
+      {isEdit || <S.AddButton onClick={onClick}>추가</S.AddButton>}
+      {isEdit && (
+        <S.MiniButtonWrapper>
+          <S.MiniButton onClick={onClick}>수정</S.MiniButton>
+          <S.MiniButton onClick={handleEditMode}>취소</S.MiniButton>
+        </S.MiniButtonWrapper>
+      )}
+    </S.Wrapper>
   );
 }

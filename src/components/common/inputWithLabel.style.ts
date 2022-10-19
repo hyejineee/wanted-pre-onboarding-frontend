@@ -14,9 +14,6 @@ export const InputWrapper = styled(TextField)({
   },
 
   "& .MuiOutlinedInput-root": {
-    "&:hover fieldset": {
-      borderColor: "yellow",
-    },
     "&.Mui-focused fieldset": {
       borderColor: "#787ff6",
     },

@@ -3,6 +3,7 @@ import { deleteTodo, updateTodo } from "../../../../api/todo";
 import { ITodo } from "../../../../types/todo";
 import TodoInput from "../../../common/todoInput";
 import TodoItemUI from "./todoItem.presenter";
+import * as S from "./todoItem.style";
 
 interface ITodoItemContainerProps {
   todo: ITodo;
@@ -48,7 +49,7 @@ export default function TodoItemContainer({
   };
 
   return (
-    <div>
+    <S.Wrapper>
       {isEdit ? (
         <TodoInput
           name="todo"
@@ -67,6 +68,6 @@ export default function TodoItemContainer({
           handleEditMode={handleEditMode}
         />
       )}
-    </div>
+    </S.Wrapper>
   );
 }

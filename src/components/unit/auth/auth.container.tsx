@@ -14,10 +14,6 @@ export default function LoginContainer() {
     message: "",
   });
 
-  useEffect(() => {
-    console.log(snackBar);
-  }, [snackBar]);
-
   const handleClickSignUp = (params: IAuthParams) => async () => {
     try {
       const token = await signUp(params);
