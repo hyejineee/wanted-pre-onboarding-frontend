@@ -1,5 +1,5 @@
 import Radio from "@mui/material/Radio";
-import { ChangeEvent } from "react";
+import { MouseEvent } from "react";
 import { MiniButton, MiniButtonWrapper } from "../../../common/todoInput.style";
 import * as S from "./todoItem.style";
 
@@ -17,8 +17,9 @@ export default function TodoItemUI({
   handleDelete,
   handleEditMode,
 }: ITodoItemUIProps) {
-  const handleChangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    handleUpdateChecked(e.target.checked);
+  const handleChangeCheck = (e: MouseEvent<any>) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    handleUpdateChecked(!completed);
   };
 
   const handleClickDelete = () => {
@@ -32,8 +33,8 @@ export default function TodoItemUI({
   return (
     <S.ItemWrapper>
       <Radio
-        onChange={handleChangeCheck}
-        defaultChecked={completed}
+        onClick={handleChangeCheck}
+        checked={completed}
         sx={{
           color: "#787ff6",
           "&.Mui-checked": {

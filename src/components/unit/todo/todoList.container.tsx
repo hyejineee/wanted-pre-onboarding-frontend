@@ -37,9 +37,7 @@ export default function TodoListContainer() {
     }
   };
 
-  useEffect(() => {
-    console.log("todos", todos);
-  }, [todos]);
+
 
   const refresh = () => {
     getTodos()

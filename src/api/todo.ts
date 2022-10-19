@@ -16,7 +16,6 @@ export const createTodo = async (todo: string) => {
       }
     );
 
-    console.log("createTodo api", data);
     return data;
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -39,8 +38,6 @@ export const getTodos = async () => {
         },
       }
     );
-
-    console.log("getTodos api", data);
 
     return data.map((e: ITodo) => e);
   } catch (e) {
@@ -69,7 +66,6 @@ export const updateTodo = async (
         },
       }
     );
-    console.log("updateTodo", data);
   } catch (e) {
     if (e instanceof AxiosError) {
       const message = e.response?.data.message;
@@ -91,7 +87,6 @@ export const deleteTodo = async (id: number) => {
         },
       }
     );
-    console.log("deleteTodo", data);
   } catch (e) {
     if (e instanceof AxiosError) {
       const message = e.response?.data.message;

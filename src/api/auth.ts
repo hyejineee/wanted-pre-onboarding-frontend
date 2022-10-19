@@ -7,7 +7,7 @@ export const signUp = async (params: IAuthParams) => {
       `${process.env.REACT_APP_API_HOST}/auth/signup`,
       params
     );
-    console.log("signUp api", data);
+
     return data.access_token;
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -23,7 +23,7 @@ export const signIn = async (params: IAuthParams) => {
       `${process.env.REACT_APP_API_HOST}/auth/signin`,
       params
     );
-    console.log("sign in api", data);
+
     return data.access_token;
   } catch (e) {
     if (e instanceof AxiosError) {

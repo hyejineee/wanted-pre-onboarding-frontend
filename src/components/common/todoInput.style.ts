@@ -25,6 +25,7 @@ export const InputWrapper = styled(TextField)({
 });
 
 export const AddButton = styled.button`
+  cursor: pointer;
   width: 20%;
   padding: 20px 10px;
   border: none;
@@ -46,6 +47,7 @@ export const MiniButtonWrapper = styled.div`
 `;
 
 export const MiniButton = styled.button`
+  cursor: pointer;
   border: none;
   width: 50%;
   margin-right: 10px;

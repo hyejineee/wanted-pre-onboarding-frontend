@@ -25,6 +25,7 @@ export default function TodoListUI({
 
   const handleClickAdd = () => {
     handleCreateTodo(inputs.todo);
+    setInputs({ todo: "" });
   };
 
   return (
@@ -34,13 +35,14 @@ export default function TodoListUI({
         <TodoInput
           onClick={handleClickAdd}
           name="todo"
+          value={inputs.todo}
           setValue={setInputs}
           isEdit={false}
         />
 
         <S.TodoListWrapper>
           {todos.map((e: ITodo, i) => (
-            <TodoItemContainer key={i} todo={e} refresh={refresh} />
+            <TodoItemContainer key={e.id} todo={e} refresh={refresh} />
           ))}
         </S.TodoListWrapper>
       </S.Container>

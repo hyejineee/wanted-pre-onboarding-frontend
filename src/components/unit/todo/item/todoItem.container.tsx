@@ -14,7 +14,7 @@ export default function TodoItemContainer({
   refresh,
 }: ITodoItemContainerProps) {
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedTodo, setUpdatedTodo] = useState({ todo: "" });
+  const [updatedTodo, setUpdatedTodo] = useState({ todo: todo.todo });
 
   const handleUpdateChecked = async (checked: boolean) => {
     try {
@@ -52,6 +52,7 @@ export default function TodoItemContainer({
     <S.Wrapper>
       {isEdit ? (
         <TodoInput
+          value={updatedTodo.todo}
           name="todo"
           defaultValue={todo.todo}
           isEdit={true}
