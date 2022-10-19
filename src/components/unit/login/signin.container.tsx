@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../../../api/auth";
 import { saveToLocal } from "../../../lib/localstorage";
 import { IAuthParams } from "../../../types/auth";
+import { ISnackBar } from "../../../types/common";
 import SignInUI from "./signin.presenter";
 
 export default function LoginContainer() {
   const navigate = useNavigate();
+
+  const [snackBar, setSnackBar] = useState<ISnackBar>({
+    visible: false,
+    message: "",
+  });
+
+  useEffect(() => {
+    console.log(snackBar);
+  }, [snackBar]);
 
   const handleClickSignUp = (params: IAuthParams) => async () => {
     try {
@@ -16,6 +26,12 @@ export default function LoginContainer() {
       navigate("/todo");
     } catch (e) {
       console.log("handleClickSignUp error", e);
+      if (e instanceof Error) {
+        setSnackBar({
+          visible: true,
+          message: e.message,
+        });
+      }
     }
   };
 
@@ -27,6 +43,12 @@ export default function LoginContainer() {
       navigate("/todo");
     } catch (e) {
       console.log("handleClickSignIn error", e);
+      if (e instanceof Error) {
+        setSnackBar({
+          visible: true,
+          message: e.message,
+        });
+      }
     }
   };
 
@@ -34,6 +56,8 @@ export default function LoginContainer() {
     <SignInUI
       handleClickSignUp={handleClickSignUp}
       handleClickSignIn={handleClickSignIn}
+      snackBar={snackBar}
+      setSnackBar={setSnackBar}
     />
   );
 }
