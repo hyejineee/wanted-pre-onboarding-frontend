@@ -15,8 +15,8 @@ const router = createBrowserRouter(
       path: "/todo",
       element: <TodoListPage />,
     },
-  ]
-  // { basename: process.env.PUBLIC_URL }
+  ],
+  { basename: process.env.PUBLIC_URL }
 );
 
 const root = ReactDOM.createRoot(
