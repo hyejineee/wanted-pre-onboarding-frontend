@@ -29,6 +29,7 @@ export default function SignInUI({
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    console.log(inputs);
     setIsActive(inputs.emailVerified && inputs.passwordVerified);
   }, [inputs]);
 
@@ -59,7 +60,7 @@ export default function SignInUI({
           label="email"
           name="email"
           error="@를 포함해주세요!"
-          verifyRegExp={/^\w+@\w+$/}
+          verifyRegExp={/^.+@.+$/}
           setValue={setInputs}
         />
         <InputWithLabel
@@ -70,7 +71,8 @@ export default function SignInUI({
           setValue={setInputs}
         />
 
-        <button
+        <S.Button
+          style={{ marginTop: "30px" }}
           disabled={!isActive}
           onClick={handleClickSignIn({
             email: inputs.email,
@@ -78,8 +80,8 @@ export default function SignInUI({
           })}
         >
           로그인
-        </button>
-        <button
+        </S.Button>
+        <S.Button
           disabled={!isActive}
           onClick={handleClickSignUp({
             email: inputs.email,
@@ -87,7 +89,7 @@ export default function SignInUI({
           })}
         >
           회원가입
-        </button>
+        </S.Button>
       </S.Container>
     </S.Wrapper>
   );
