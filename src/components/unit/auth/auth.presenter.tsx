@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { IAuthParams } from "../../../types/auth";
 import { ISnackBar } from "../../../types/common";
 import InputWithLabel from "../../common/inputWithLabel";
-import * as S from "./signin.style";
+import * as S from "./auth.style";
 
 interface ISignInUIProps {
   snackBar: ISnackBar;
@@ -29,7 +29,6 @@ export default function SignInUI({
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    console.log(inputs);
     setIsActive(inputs.emailVerified && inputs.passwordVerified);
   }, [inputs]);
 
