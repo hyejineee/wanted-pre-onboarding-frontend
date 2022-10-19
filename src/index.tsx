@@ -16,12 +16,13 @@ const router = createBrowserRouter(
       element: <TodoListPage />,
     },
   ],
-  { basename: process.env.REACT_APP_PUBLIC_URL }
+  { basename: process.env.PUBLIC_URL }
 );
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 
 root.render(
   <React.StrictMode>
