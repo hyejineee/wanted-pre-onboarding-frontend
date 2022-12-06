@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn, signUp } from "../../../api/auth";
 import { saveToLocal } from "../../../lib/localstorage";
 import { IAuthParams } from "../../../types/auth";
-import { ISnackBar } from "../../../types/common";
 import SignInUI from "./auth.presenter";
+import { message } from "antd";
+import { Fragment } from "react";
 
 export default function LoginContainer() {
   const navigate = useNavigate();
 
-  const [snackBar, setSnackBar] = useState<ISnackBar>({
-    visible: false,
-    message: "",
-  });
+  const [messageAPI, contextHolder] = message.useMessage();
 
   const handleClickSignUp = (params: IAuthParams) => async () => {
     try {
       const token = await signUp(params);
       saveToLocal({ key: "accessToken", value: token });
 
-      navigate("/todo");
+      messageAPI.open({
+        type: "success",
+        content: "회원가입 성공. 로그인해 주세요.",
+      });
     } catch (e) {
       console.log("handleClickSignUp error", e);
       if (e instanceof Error) {
-        setSnackBar({
-          visible: true,
-          message: e.message,
+        messageAPI.open({
+          type: "error",
+          content: e.message,
         });
       }
     }
@@ -36,24 +36,27 @@ export default function LoginContainer() {
       const token = await signIn(params);
       saveToLocal({ key: "accessToken", value: token });
 
+      messageAPI.open({
+        type: "success",
+        content: "로그인 성공",
+      });
+
       navigate("/todo");
     } catch (e) {
       console.log("handleClickSignIn error", e);
       if (e instanceof Error) {
-        setSnackBar({
-          visible: true,
-          message: e.message,
+        messageAPI.open({
+          type: "error",
+          content: e.message,
         });
       }
     }
   };
 
   return (
-    <SignInUI
-      handleClickSignUp={handleClickSignUp}
-      handleClickSignIn={handleClickSignIn}
-      snackBar={snackBar}
-      setSnackBar={setSnackBar}
-    />
+    <Fragment>
+      {contextHolder}
+      <SignInUI handleClickSignUp={handleClickSignUp} handleClickSignIn={handleClickSignIn} />;
+    </Fragment>
   );
 }

@@ -7,7 +7,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   useEffect(() => {
     if (getFromLocal("accessToken")) {
-      return navigate("/todo");
+      return navigate("/");
     }
   }, [navigate]);
   return <LoginContainer />;

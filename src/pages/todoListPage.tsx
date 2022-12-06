@@ -7,7 +7,7 @@ export default function TodoListPage() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!getFromLocal("accessToken")) {
-      return navigate("/");
+      return navigate("/todo");
     }
   }, [navigate]);
   return <TodoListContainer />;

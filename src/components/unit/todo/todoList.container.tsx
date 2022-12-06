@@ -1,23 +1,20 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { createTodo, getTodos } from "../../../api/todo";
-import { ISnackBar } from "../../../types/common";
 import { ITodo } from "../../../types/todo";
 import TodoListUI from "./todoList.presenter";
+import { message } from "antd";
 
 export default function TodoListContainer() {
   const [todos, setTodos] = useState<ITodo[]>([]);
-  const [snackBar, setSnackBar] = useState<ISnackBar>({
-    visible: false,
-    message: "",
-  });
+  const [messageAPI, contextHolder] = message.useMessage();
 
   useEffect(() => {
     getTodos()
       .then((e: ITodo[]) => setTodos([...e.reverse()]))
       .catch((error) => {
-        setSnackBar({
-          visible: true,
-          message: error,
+        messageAPI.open({
+          type: "error",
+          content: error.message,
         });
       });
   }, []);
@@ -25,37 +22,39 @@ export default function TodoListContainer() {
   const handleCreateTodo = async (todo: string) => {
     try {
       const result = await createTodo(todo);
-      setTodos((p: any) => [result, ...p]);
+
+      if (!result) throw Error("로그인 먼저 해주세요.");
+
+      setTodos((p: any) => {
+        console.log(p);
+        return [result, ...p];
+      });
     } catch (e) {
       console.log("handleCreateTodo error", e);
       if (e instanceof Error) {
-        setSnackBar({
-          visible: true,
-          message: e.message,
+        messageAPI.open({
+          type: "error",
+          content: e.message,
         });
       }
     }
   };
 
-
-
   const refresh = () => {
     getTodos()
       .then((e: ITodo[]) => setTodos([...e.reverse()]))
       .catch((error) => {
-        setSnackBar({
-          visible: true,
-          message: error,
+        messageAPI.open({
+          type: "error",
+          content: error,
         });
       });
   };
 
   return (
-    <TodoListUI
-      handleCreateTodo={handleCreateTodo}
-      todos={todos}
-      refresh={refresh}
-      snackBar={snackBar}
-    />
+    <Fragment>
+      {contextHolder}
+      <TodoListUI handleCreateTodo={handleCreateTodo} todos={todos} refresh={refresh} />;
+    </Fragment>
   );
 }
