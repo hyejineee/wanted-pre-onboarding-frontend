@@ -1,28 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from "./pages/loginPage";
-import TodoListPage from "./pages/todoListPage";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <LoginPage />,
-    },
-    {
-      path: "/todo",
-      element: <TodoListPage />,
-    },
-  ],
-  { basename: process.env.PUBLIC_URL }
-);
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
   <React.StrictMode>
