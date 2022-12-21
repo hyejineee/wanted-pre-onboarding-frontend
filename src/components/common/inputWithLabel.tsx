@@ -9,8 +9,10 @@ interface IInputWithLabelProps {
   verifyRegExp: RegExp;
   setValue: React.Dispatch<React.SetStateAction<any>>;
 }
+
 export default function InputWithLabel({ type, label, name, error, verifyRegExp, setValue }: IInputWithLabelProps) {
   const [showError, setShowError] = useState(false);
+ 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setShowError(!verifyRegExp.test(value));

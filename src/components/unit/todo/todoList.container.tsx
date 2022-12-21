@@ -9,14 +9,7 @@ export default function TodoListContainer() {
   const [messageAPI, contextHolder] = message.useMessage();
 
   useEffect(() => {
-    getTodos()
-      .then((e: ITodo[]) => setTodos([...e.reverse()]))
-      .catch((error) => {
-        messageAPI.open({
-          type: "error",
-          content: error.message,
-        });
-      });
+    fetchTodos();
   }, []);
 
   const handleCreateTodo = async (todo: string) => {
@@ -40,7 +33,7 @@ export default function TodoListContainer() {
     }
   };
 
-  const refresh = () => {
+  const fetchTodos = () => {
     getTodos()
       .then((e: ITodo[]) => setTodos([...e.reverse()]))
       .catch((error) => {
@@ -54,7 +47,7 @@ export default function TodoListContainer() {
   return (
     <Fragment>
       {contextHolder}
-      <TodoListUI handleCreateTodo={handleCreateTodo} todos={todos} refresh={refresh} />;
+      <TodoListUI handleCreateTodo={handleCreateTodo} todos={todos} refresh={fetchTodos} />;
     </Fragment>
   );
 }

@@ -6,7 +6,7 @@ import SignInUI from "./auth.presenter";
 import { message } from "antd";
 import { Fragment } from "react";
 
-export default function LoginContainer() {
+export default function AuthContainer() {
   const navigate = useNavigate();
 
   const [messageAPI, contextHolder] = message.useMessage();

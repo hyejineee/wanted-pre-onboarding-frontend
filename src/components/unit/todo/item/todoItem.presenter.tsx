@@ -10,13 +10,8 @@ interface ITodoItemUIProps {
   handleDelete: () => void;
   handleEditMode: () => void;
 }
-export default function TodoItemUI({
-  todo,
-  completed,
-  handleUpdateChecked,
-  handleDelete,
-  handleEditMode,
-}: ITodoItemUIProps) {
+
+export default function TodoItemUI({ todo, completed, handleUpdateChecked, handleDelete, handleEditMode }: ITodoItemUIProps) {
   const handleChangeCheck = (e: MouseEvent<any>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     handleUpdateChecked(!completed);

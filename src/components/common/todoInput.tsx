@@ -20,6 +20,7 @@ export default function TodoInput({
   onClick,
   handleEditMode,
 }: ITodoInputProps) {
+  
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

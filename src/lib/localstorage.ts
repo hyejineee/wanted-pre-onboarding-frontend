@@ -14,5 +14,5 @@ export const saveToLocal = ({ key, value }: ISaveParams) => {
 
 export const getFromLocal = (key: string) => {
   const result = localStorage.getItem(key);
-  return result ? JSON.parse(result) : null;
+  return result && JSON.parse(result); 
 };
